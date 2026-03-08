@@ -1,6 +1,5 @@
 import { StreamChat } from "stream-chat";
 import * as Sentry from "@sentry/react-native";
-import { enTranslations } from "stream-chat-expo";
 
 const API_KEY = process.env.EXPO_PUBLIC_STREAM_API_KEY as string;
 const SECRET_KEY = process.env.STREAM_SECRET_KEY as string;
@@ -27,8 +26,6 @@ export async function POST(request: Request) {
         Sentry.captureException(error, {
             extra: { userId, name, image }
         });
-
         return Response.json({ error: "Failed to sync user to Stream" }, { status: 500 });
     }
-
 }
