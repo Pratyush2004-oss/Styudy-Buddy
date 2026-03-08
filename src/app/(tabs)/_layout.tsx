@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     androidMainTabsGroup: {
         flex: 1,
         marginRight: 12,
-        borderRadius: 24,
+        borderRadius: 35,
         backgroundColor: TAB_COLORS.androidBackground,
         paddingHorizontal: 6,
         paddingVertical: 6,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     },
     androidMainTabButton: {
         flex: 1,
-        borderRadius: 18,
+        borderRadius: 30,
         paddingVertical: 8,
         alignItems: 'center',
         justifyContent: 'center',
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     androidSearchButton: {
         width: 52,
         height: 52,
-        borderRadius: 26,
+        borderRadius: 30,
         backgroundColor: TAB_COLORS.androidBackground,
         alignItems: 'center',
         justifyContent: 'center',

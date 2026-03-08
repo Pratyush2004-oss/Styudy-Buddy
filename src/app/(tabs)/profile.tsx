@@ -1,11 +1,11 @@
-import { View, Text, Pressable, Alert, ScrollView } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useAuth, useUser } from '@clerk/clerk-expo';
-import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '@/lib/theme';
+import { useAuth, useUser } from '@clerk/clerk-expo';
+import { Ionicons } from '@expo/vector-icons';
 import * as Sentry from '@sentry/react-native';
+import { Image } from 'expo-image';
+import React from 'react';
+import { Alert, Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MENU_ITEMS = [
     { icon: "notifications-outline", label: "Notifications", color: COLORS.primary },
@@ -30,52 +30,55 @@ const ProfileScreen = () => {
     }
     return (
         <SafeAreaView className='flex-1 bg-background'>
-            {/* Header Component */}
-            <View className='px-5 py-3'>
-                <Text className='text-2xl font-outfit-bold text-foreground'>Profile</Text>
-            </View>
-
-            {/* Profile Card */}
-            <View className='items-center py-5'>
-                <View className='mb-3.5 relative'>
-                    <Image source={user?.imageUrl} style={{ width: 100, height: 100, borderRadius: 44 }}
-                        contentFit='contain'
-                    />
-                    <View className='absolute bottom-[2px] right-[2px] size-[18px] rounded-full bg-accent-secondary border-[3px] border-background' />
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 80 }}
+            >
+                {/* Header Component */}
+                <View className='px-5 py-3'>
+                    <Text className='text-2xl font-outfit-bold text-foreground'>Profile</Text>
                 </View>
-                <Text className='text-2xl font-outfit-bold text-foreground'>
-                    {user?.fullName || user?.username || "Student"}
-                </Text>
 
-                <Text className='mt-0.5 text-base text-foreground-muted font-outfit'>
-                    {user?.primaryEmailAddress?.emailAddress}
-                </Text>
-
-                <View className='flex-row items-center mt-3 gap-1.5 rounded-full bg-[#FDCB6E1E] px-3.5 py-1.5'>
-                    <Ionicons name='flame' size={16} color={"#FDCB6E"} />
-                    <Text className='text-sm font-outfit-semibold text-[#FDCB6E]'>
-                        7 day study Streak
+                {/* Profile Card */}
+                <View className='items-center py-5'>
+                    <View className='mb-3.5 relative'>
+                        <Image source={user?.imageUrl} style={{ width: 100, height: 100, borderRadius: 44 }}
+                            contentFit='contain'
+                        />
+                        <View className='absolute bottom-[2px] right-[2px] size-[18px] rounded-full bg-accent-secondary border-[3px] border-background' />
+                    </View>
+                    <Text className='text-2xl font-outfit-bold text-foreground'>
+                        {user?.fullName || user?.username || "Student"}
                     </Text>
-                </View>
-            </View>
 
-            {/* Stats */}
-            <View className="flex-row gap-3 px-5 mt-2 mb-6">
-                <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                    <Text className="text-2xl font-bold text-primary">24</Text>
-                    <Text className="mt-1 text-xs text-foreground-muted">Sessions</Text>
-                </View>
-                <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                    <Text className="text-2xl font-bold text-primary">12</Text>
-                    <Text className="mt-1 text-xs text-foreground-muted">Partners</Text>
-                </View>
-                <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                    <Text className="text-2xl font-bold text-primary">48h</Text>
-                    <Text className="mt-1 text-xs text-foreground-muted">Study Time</Text>
-                </View>
-            </View>
+                    <Text className='mt-0.5 text-base text-foreground-muted font-outfit'>
+                        {user?.primaryEmailAddress?.emailAddress}
+                    </Text>
 
-            <ScrollView className="flex-1">
+                    <View className='flex-row items-center mt-3 gap-1.5 rounded-full bg-[#FDCB6E1E] px-3.5 py-1.5'>
+                        <Ionicons name='flame' size={16} color={"#FDCB6E"} />
+                        <Text className='text-sm font-outfit-semibold text-[#FDCB6E]'>
+                            7 day study Streak
+                        </Text>
+                    </View>
+                </View>
+
+                {/* Stats */}
+                <View className="flex-row gap-3 px-5 mt-2 mb-6">
+                    <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
+                        <Text className="text-2xl font-bold text-primary">24</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted">Sessions</Text>
+                    </View>
+                    <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
+                        <Text className="text-2xl font-bold text-primary">12</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted">Partners</Text>
+                    </View>
+                    <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
+                        <Text className="text-2xl font-bold text-primary">48h</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted">Study Time</Text>
+                    </View>
+                </View>
+
                 {/* Menu */}
                 <View className="gap-1 px-5">
                     {MENU_ITEMS.map((item, i) => (
@@ -103,10 +106,9 @@ const ProfileScreen = () => {
                     <Ionicons name="log-out-outline" size={20} color={COLORS.danger} />
                     <Text className="text-base font-semibold text-danger">Sign Out</Text>
                 </Pressable>
-
             </ScrollView>
-        </SafeAreaView>
 
+        </SafeAreaView>
     )
 }
 

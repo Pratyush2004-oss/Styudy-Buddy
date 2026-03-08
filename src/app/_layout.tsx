@@ -12,6 +12,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import '../../global.css';
 import * as Sentry from '@sentry/react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 Sentry.init({
   dsn: 'https://766ea82e90a3c2ad4d8c72b6b14be1d6@o4510985992339456.ingest.us.sentry.io/4510995070058496',
@@ -54,10 +55,13 @@ export default function RootLayout() {
 
   return (
     <ClerkProvider tokenCache={tokenCache}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(tabs)" />
-      </Stack>
+
+      <GestureHandlerRootView className='flex-1'>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+      </GestureHandlerRootView>
     </ClerkProvider>
   )
 }
