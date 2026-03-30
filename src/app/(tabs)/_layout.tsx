@@ -4,7 +4,7 @@ import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Redirect, Tabs } from 'expo-router';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import React from 'react';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
 
 const TAB_COLORS = {
     androidBackground: '#0B1620',
@@ -34,8 +34,8 @@ const AndroidTabBar = ({ state, navigation }: BottomTabBarProps) => {
     const searchIndex = state.routes.findIndex((route) => route.name === 'search');
 
     return (
-        <View style={styles.androidTabBarContainer}>
-            <View style={styles.androidMainTabsGroup}>
+        <View className="absolute bottom-[5px] left-3 right-3 flex-row items-center justify-between">
+            <View className="mr-3 flex-1 flex-row items-center rounded-[35px] bg-[#0B1620] px-1.5 py-1.5">
                 {MAIN_ANDROID_TABS.map((tabName) => {
                     const routeIndex = state.routes.findIndex((route) => route.name === tabName);
                     if (routeIndex < 0) {
@@ -61,14 +61,18 @@ const AndroidTabBar = ({ state, navigation }: BottomTabBarProps) => {
                                     navigation.navigate(route.name, route.params);
                                 }
                             }}
-                            style={[styles.androidMainTabButton, isFocused && styles.androidMainTabButtonActive]}
+                            android_ripple={{ color: TAB_COLORS.androidRipple, borderless: false }}
+                            className={`flex-1 items-center justify-center rounded-[30px] py-2 ${isFocused ? 'bg-[#1FD8C8]/75' : ''}`}
                         >
                             <MaterialIcons
                                 name={TAB_ICONS[tabName]}
                                 size={20}
                                 color={isFocused ? TAB_COLORS.androidIconActive : TAB_COLORS.androidIconDefault}
                             />
-                            <Text style={[styles.androidMainTabLabel, isFocused && styles.androidMainTabLabelActive]}>
+                            <Text
+                                className={`mt-0.5 text-xs ${isFocused ? 'text-white' : 'text-[#8BA1B5]'}`}
+                                style={{ fontFamily: 'Outfit', fontWeight: isFocused ? '700' : '500' }}
+                            >
                                 {TAB_LABELS[tabName]}
                             </Text>
                         </Pressable>
@@ -92,10 +96,8 @@ const AndroidTabBar = ({ state, navigation }: BottomTabBarProps) => {
                             navigation.navigate(route.name, route.params);
                         }
                     }}
-                    style={[
-                        styles.androidSearchButton,
-                        state.index === searchIndex && styles.androidSearchButtonActive,
-                    ]}
+                    android_ripple={{ color: TAB_COLORS.androidRipple, borderless: false }}
+                    className={`h-[52px] w-[52px] items-center justify-center rounded-[30px] ${state.index === searchIndex ? 'bg-[#1FD8C8]' : 'bg-[#0B1620]'}`}
                 >
                     <MaterialIcons
                         name={TAB_ICONS.search}
@@ -109,14 +111,15 @@ const AndroidTabBar = ({ state, navigation }: BottomTabBarProps) => {
 };
 
 const TabsLayout = () => {
-    const { isSignedIn, isLoaded } = useAuth()
-    const isAndroid = Platform.OS === 'android'
+    const { isSignedIn, isLoaded } = useAuth();
+    const isAndroid = Platform.OS === 'android';
 
     if (!isLoaded) {
-        return null
+        return null;
     }
+
     if (!isSignedIn) {
-        return <Redirect href={'/(auth)'} />
+        return <Redirect href={'/(auth)'} />;
     }
 
     if (isAndroid) {
@@ -124,7 +127,13 @@ const TabsLayout = () => {
             <Tabs
                 screenOptions={{
                     headerShown: false,
-                    tabBarStyle: styles.hiddenDefaultTabBar,
+                    tabBarStyle: {
+                        position: 'absolute',
+                        borderTopWidth: 0,
+                        elevation: 0,
+                        backgroundColor: 'transparent',
+                        height: 0,
+                    },
                 }}
                 tabBar={(props) => <AndroidTabBar {...props} />}
             >
@@ -133,11 +142,11 @@ const TabsLayout = () => {
                 <Tabs.Screen name="profile" options={{ title: TAB_LABELS.profile }} />
                 <Tabs.Screen name="search" options={{ title: TAB_LABELS.search }} />
             </Tabs>
-        )
+        );
     }
 
     return (
-        <NativeTabs>
+        <NativeTabs labelStyle={{ fontFamily: 'Outfit' }}>
             <NativeTabs.Trigger name="index">
                 <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon sf="message" md="chat" selectedColor={'#6C5CE7'} />
@@ -146,78 +155,16 @@ const TabsLayout = () => {
                 <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon sf="safari" md="explore" selectedColor={'#6C5CE7'} />
             </NativeTabs.Trigger>
-            <NativeTabs.Trigger name='profile'>
+            <NativeTabs.Trigger name="profile">
                 <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon sf="person.fill" md="person" selectedColor={'#6C5CE7'} />
             </NativeTabs.Trigger>
-
-            <NativeTabs.Trigger name='search' role='search'>
+            <NativeTabs.Trigger name="search" role="search">
                 <NativeTabs.Trigger.Label>Search</NativeTabs.Trigger.Label>
                 <NativeTabs.Trigger.Icon sf="magnifyingglass" md="search" selectedColor={'#6C5CE7'} />
             </NativeTabs.Trigger>
         </NativeTabs>
-    )
-}
+    );
+};
 
-const styles = StyleSheet.create({
-    hiddenDefaultTabBar: {
-        position: 'absolute',
-        borderTopWidth: 0,
-        elevation: 0,
-        backgroundColor: 'transparent',
-        height: 0,
-    },
-    androidTabBarContainer: {
-        position: 'absolute',
-        left: 12,
-        right: 12,
-        bottom: 5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    androidMainTabsGroup: {
-        flex: 1,
-        marginRight: 12,
-        borderRadius: 35,
-        backgroundColor: TAB_COLORS.androidBackground,
-        paddingHorizontal: 6,
-        paddingVertical: 6,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    androidMainTabButton: {
-        flex: 1,
-        borderRadius: 30,
-        paddingVertical: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    androidMainTabButtonActive: {
-        backgroundColor: TAB_COLORS.androidIndicator,
-        opacity: 0.75,
-    },
-    androidMainTabLabel: {
-        marginTop: 2,
-        fontSize: 12,
-        color: TAB_COLORS.androidIconDefault,
-        fontWeight: '500',
-    },
-    androidMainTabLabelActive: {
-        color: TAB_COLORS.androidIconActive,
-        fontWeight: '700',
-    },
-    androidSearchButton: {
-        width: 52,
-        height: 52,
-        borderRadius: 30,
-        backgroundColor: TAB_COLORS.androidBackground,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    androidSearchButtonActive: {
-        backgroundColor: TAB_COLORS.androidIndicator,
-    },
-});
-
-export default TabsLayout
+export default TabsLayout;

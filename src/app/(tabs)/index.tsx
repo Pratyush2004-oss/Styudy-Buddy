@@ -1,17 +1,18 @@
-import { View, Text, Button, Pressable } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import * as Sentry from '@sentry/react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { getGreetingForHour } from '@/lib/utils';
+import { useUser } from '@clerk/clerk-expo';
 
-const HomeScreen = () => {
+const ChatScreen = () => {
+    const { user } = useUser();
     return (
-        <SafeAreaView>
-            <Text>HomeScreen</Text>
-            <Pressable onPress={() => { Sentry.captureException(new Error('First error')) }}>
-                <Text>Throw error</Text>
-            </Pressable>
+        <SafeAreaView className='flex-1 bg-background'>
+            <View className='px-5 pt-3 pb-2'>
+                <Text className='text-sm text-foreground-muted mb-0.5 font-outfit'>{getGreetingForHour()}, {user?.firstName}</Text>
+            </View>
         </SafeAreaView>
     )
 }
 
-export default HomeScreen
+export default ChatScreen;

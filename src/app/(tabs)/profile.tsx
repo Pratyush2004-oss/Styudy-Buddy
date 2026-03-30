@@ -66,16 +66,16 @@ const ProfileScreen = () => {
                 {/* Stats */}
                 <View className="flex-row gap-3 px-5 mt-2 mb-6">
                     <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                        <Text className="text-2xl font-bold text-primary">24</Text>
-                        <Text className="mt-1 text-xs text-foreground-muted">Sessions</Text>
+                        <Text className="text-2xl font-outfit-bold text-primary">24</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted font-outfit">Sessions</Text>
                     </View>
                     <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                        <Text className="text-2xl font-bold text-primary">12</Text>
-                        <Text className="mt-1 text-xs text-foreground-muted">Partners</Text>
+                        <Text className="text-2xl font-outfit-bold text-primary">12</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted font-outfit">Partners</Text>
                     </View>
                     <View className="items-center flex-1 px-4 py-4 border rounded-2xl border-border bg-surface">
-                        <Text className="text-2xl font-bold text-primary">48h</Text>
-                        <Text className="mt-1 text-xs text-foreground-muted">Study Time</Text>
+                        <Text className="text-2xl font-outfit-bold text-primary">48h</Text>
+                        <Text className="mt-1 text-xs text-foreground-muted font-outfit">Study Time</Text>
                     </View>
                 </View>
 
@@ -92,7 +92,7 @@ const ProfileScreen = () => {
                             >
                                 <Ionicons name={item.icon as any} size={22} color={item.color} />
                             </View>
-                            <Text className="flex-1 text-base font-medium text-foreground">{item.label}</Text>
+                            <Text className="flex-1 text-base font-outfit-medium text-foreground">{item.label}</Text>
                             <Ionicons name="chevron-forward" size={18} color={COLORS.textSubtle} />
                         </Pressable>
                     ))}
@@ -104,7 +104,7 @@ const ProfileScreen = () => {
                     onPress={handleSignout}
                 >
                     <Ionicons name="log-out-outline" size={20} color={COLORS.danger} />
-                    <Text className="text-base font-semibold text-danger">Sign Out</Text>
+                    <Text className="text-base font-outfit-semibold text-danger">Sign Out</Text>
                 </Pressable>
             </ScrollView>
 
