@@ -9,7 +9,7 @@ import { FullScreenLoader } from './FullScreenLoader';
 const STREAM_API_KEY = process.env.EXPO_PUBLIC_STREAM_API_KEY as string;
 const syncUserToStream = async (user: UserResource) => {
     try {
-        await fetch("api/sync-user", {
+        await fetch("/api/sync-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -22,7 +22,6 @@ const syncUserToStream = async (user: UserResource) => {
         })
     } catch (error) {
         console.log("Failed to sync user to Stream: ", error)
-
     }
 }
 
