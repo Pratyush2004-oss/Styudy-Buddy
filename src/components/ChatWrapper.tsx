@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import { Chat, OverlayProvider, useCreateChatClient } from 'stream-chat-expo';
 import { FullScreenLoader } from './FullScreenLoader';
 
+
 const STREAM_API_KEY = process.env.EXPO_PUBLIC_STREAM_API_KEY as string;
 const syncUserToStream = async (user: UserResource) => {
     try {

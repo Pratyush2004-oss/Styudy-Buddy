@@ -17,7 +17,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.pratyush_075.Study01"
     },
     "web": {
       "output": "server",
@@ -44,11 +45,24 @@
           "project": "study-01",
           "organization": "none-4nu"
         }
-      ]
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "${PRODUCT_NAME} would like to access your camera to share image in a message"
+        }
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "5ebd71a9-a0f6-44f4-a504-98e070acd7e2"
+      }
     }
   }
 }

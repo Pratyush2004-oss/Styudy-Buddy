@@ -69,7 +69,7 @@ const ChannelScreen = () => {
                         )}
                     <Text className='font-outfit-semibold text-foreground'>{displayName}</Text>
                 </View>
-            ), 
+            ),
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
                     // to do: implement video call functionality later
@@ -99,10 +99,8 @@ const ChannelScreen = () => {
             >
                 <MessageList
                     onThreadSelect={(thread) => {
-                        if (thread) {
-                            setThread(thread);
-                            router.push(`/channel/${channel.cid}/thread/${thread.cid}`);
-                        }
+                        setThread(thread);
+                        router.push(`/channel/${channel.cid}/thread/${thread?.cid}`);
                     }}
                 />
 

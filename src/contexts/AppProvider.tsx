@@ -3,9 +3,9 @@ import type { Channel, LocalMessage } from "stream-chat";
 
 type AppContextType = {
     channel: Channel | null;
-    setChannel: (channel: Channel) => void;
+    setChannel: (channel: Channel | null) => void;
     thread: LocalMessage | null;
-    setThread: (thread: LocalMessage) => void;
+    setThread: (thread: LocalMessage | null) => void;
 }
 
 export const AppContext = React.createContext<AppContextType>({
