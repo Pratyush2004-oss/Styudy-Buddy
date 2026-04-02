@@ -49,10 +49,16 @@
       [
         "expo-image-picker",
         {
-          "cameraPermission": "${PRODUCT_NAME} would like to access your camera to share image in a message"
+          "cameraPermission": "${PRODUCT_NAME} would like to access your camera to share image in a message",
+          "photoPermission": "${PRODUCT_NAME} would like to access your photo library to share image in a message"
         }
       ],
-      "expo-audio"
+      [
+        "expo-audio",
+        {
+          "microphonePermission":"{PRODUCT_NAME} would like to access your microphone to share audio in a message"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
