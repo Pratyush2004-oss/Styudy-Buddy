@@ -28,6 +28,25 @@
     "plugins": [
       "expo-router",
       [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          }
+        }
+      ],
+      [
+        "@stream-io/video-react-native-sdk",
+        [
+          "@config-plugins/react-native-webrtc",
+          {
+            // add your explanations for camera and microphone
+            "cameraPermission": "$(PRODUCT_NAME) requires camera access in order to capture and transmit video",
+            "microphonePermission": "$(PRODUCT_NAME) requires microphone access in order to capture and transmit audio"
+          }
+        ]
+      ],
+      [
         "expo-splash-screen",
         {
           "backgroundColor": "#208AEF",
@@ -56,7 +75,7 @@
       [
         "expo-audio",
         {
-          "microphonePermission":"{PRODUCT_NAME} would like to access your microphone to share audio in a message"
+          "microphonePermission": "{PRODUCT_NAME} would like to access your microphone to share audio in a message"
         }
       ]
     ],

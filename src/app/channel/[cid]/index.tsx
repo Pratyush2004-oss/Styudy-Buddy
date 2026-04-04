@@ -72,7 +72,13 @@ const ChannelScreen = () => {
             ),
             headerRight: () => (
                 <TouchableOpacity onPress={() => {
-                    // to do: implement video call functionality later
+                    router.push({
+                        pathname: "/call/[callId]",
+                        params: {
+                            callId: channel?.id!
+                        }
+                    })
+
                 }}
                     className='flex-row items-center p-2 mr-2 border rounded-full border-primary'
                 >
@@ -106,7 +112,7 @@ const ChannelScreen = () => {
 
                 <View className='pb-5 bg-surface'>
                     <MessageInput
-                    audioRecordingEnabled
+                        audioRecordingEnabled
                     />
                 </View>
             </Channel>
